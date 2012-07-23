@@ -1,35 +1,7 @@
 <h1>Listing people</h1>
  
- <p>
-    Order by <%= link_to 'name', people_path(:order_by => 'name') %> | <%= link_to 'position', people_path(:order_by => 'position') %>
- </p>
+<%= render 'sorted_people' %>
  
- <ul id="sortable">
-<% @people.each do |person| %>
-  <li class="ui-state-default" id="<%=person.id%>">
-      <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
-        <%= person.name %>
-        <%= link_to 'Show', person, :class => 'person-edit' %> 
-        <%= link_to 'Edit', edit_person_path(person), :class => 'person-edit' %> 
-        <%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'person-edit' %> 
-    </span>
-  </li>
-<% end %>
-</ul>
-
 <br />
 
 <%= link_to 'New Person', new_person_path %>
-
-<script>
-	$(function() {
-		$( "#sortable" ).disableSelection();
-		$( "#sortable" ).sortable({
-           stop: function(event, ui) {
-               ui_order = $(this).sortable('toArray');
-               $.post('<%= positions_state_path %>.json', { positions: ui_order} )
-                    .error(function() { alert("error while processing sorting.")} );
-           }
-        });
-	});
-</script>
