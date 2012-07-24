@@ -1,5 +1,5 @@
  <p>
-    Order by <%= link_to 'name', people_path(:order_by => 'name') %> | <%= link_to 'position', people_path(:order_by => 'position') %>
+    Reorder by <%= link_to 'name', reorder_people_by_name_path, :method => :post %>
  </p>
  
  <ul id="sortable">

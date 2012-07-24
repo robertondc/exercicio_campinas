@@ -1,3 +1,0 @@
-To add sorted listing put in your index file:
-
-<%= render 'people/sorted_people' %>

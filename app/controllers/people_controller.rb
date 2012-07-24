@@ -1,10 +1,10 @@
 class PeopleController < ApplicationController
+  include PeopleHelper
+  
   # GET /people
   # GET /people.json
   def index
-    order_by = params[:order_by] || 'position' 
-    @people = Person.all(:order => order_by)
-    
+    @people = Person.all
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @people }
@@ -83,14 +83,15 @@ class PeopleController < ApplicationController
   end
 
   def positions_state
-    params[:positions].each_with_index do |id,index|
-      person = Person.find(id)
-      person.position = index
-      person.save
-    end
+    update_positions_state(params[:old_positions],params[:new_positions])
     respond_to do |format|
       format.json { head :no_content }
     end
-  end  
+  end
+
+  def reorder_by_name
+    reorder(:name)
+    redirect_to people_path
+  end
   
 end

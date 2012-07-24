@@ -1,19 +1,15 @@
 class Person < ActiveRecord::Base
+  
+  include PeopleHelper
+  
+  default_scope order("position")
+
   attr_accessible :name
   before_create :put_last_position
-  after_destroy :reorder
+  after_destroy :reorder_positions
   
   def put_last_position
-    last_position = Person.maximum(:position)
-    self.position = last_position.nil? ? 0 : last_position + 1
+    self.position = last_position
   end
-  
-  def reorder
-    people = Person.all(:order => 'position,name')
-    people.each_with_index do |person,index|
-      person.position = index
-      person.save
-    end
-  end
-  
+    
 end

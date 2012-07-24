@@ -58,4 +58,5 @@ Exercicio::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
   match 'people/positions_state(.:format)' => 'people#positions_state', :method => :post, :as => 'positions_state'
+  match 'people/reorder_by_name(.:format)' => 'people#reorder_by_name', :method => :post, :as => 'reorder_people_by_name'
 end
