@@ -1,6 +1,5 @@
-class PeopleController < ApplicationController
-  include PeopleHelper
-  
+class PeopleController < ApplicationController 
+     
   # GET /people
   # GET /people.json
   def index
@@ -83,14 +82,14 @@ class PeopleController < ApplicationController
   end
 
   def positions_state
-    update_positions_state(params[:old_positions],params[:new_positions])
+    Person.update_positions_state(params[:old_positions],params[:new_positions])
     respond_to do |format|
       format.json { head :no_content }
     end
   end
 
   def reorder_by_name
-    reorder(:name)
+    Person.reorder(:name)
     redirect_to people_path
   end
   

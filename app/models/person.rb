@@ -1,6 +1,6 @@
 class Person < ActiveRecord::Base
   
-  include PeopleHelper
+  extend PeopleSorting
   
   default_scope order("position")
 
@@ -11,5 +11,6 @@ class Person < ActiveRecord::Base
   def put_last_position
     self.position = last_position
   end
+  
     
 end
