@@ -1,7 +1,7 @@
 module PeopleHelper
   
   def update_positions_state(old_positions,new_positions)
-    old_positions.each do |person_id,old_index|
+    old_positions.each_with_index do |person_id,old_index|
       new_index = new_positions.index(person_id)
       if old_index != new_index
         person = Person.find(person_id)
