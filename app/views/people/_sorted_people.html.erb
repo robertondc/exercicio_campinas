@@ -1,3 +1,8 @@
+
+<%= javascript_tag do %>
+  window.sortingURL = '<%=j "#{positions_state_path}.json" %>';
+<% end %>
+ 
  <p>
     Reorder by <%= link_to 'name', reorder_people_by_name_path, :method => :post %>
  </p>
