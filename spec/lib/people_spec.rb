@@ -1,7 +1,7 @@
 require 'spec_helper'
-include PeopleSorting
+include People::Sorting
 
-describe PeopleSorting do
+describe People::Sorting do
   
   describe ".last_position" do
      it "give zero when there are no people" do
