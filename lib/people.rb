@@ -43,6 +43,9 @@ module People
     
     
     module SortableModel
+      
+      include Sorting
+      
       def self.included(base)
         base.class_eval do
           default_scope order("position")
