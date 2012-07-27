@@ -1,7 +1,8 @@
 require 'spec_helper'
-include People::Sorting
 
-describe People::Sorting do
+include SortableModel::ClassMethods
+
+describe SortableModel::ClassMethods do
   
   describe ".last_position" do
      it "give zero when there are no people" do
@@ -16,19 +17,24 @@ describe People::Sorting do
 
   describe ".update_positions_state" do
     
-     it "update index id change" do
+     it "update model positions when positions has changed" do
+     
        cassia = Person.create(:name => "cassia")
        roberto = Person.create(:name => "roberto")
        paulo = Person.create(:name => "paulo")
-
-       old_positions = [cassia.id,roberto.id,paulo.id]
-       new_positions = [roberto.id,cassia.id,paulo.id]
        
+       cassia.position.should eq(0)
+       roberto.position.should eq(1)
+       paulo.position.should eq(2)
+       
+       old_positions = [cassia.id,roberto.id,paulo.id]
+       new_positions = [cassia.id,paulo.id,roberto.id]
+      
        update_positions_state(old_positions,new_positions)
        
-       Person.find(roberto.id).position.should == 0
-       Person.find(cassia.id).position.should == 1
-       Person.find(paulo.id).position.should == 2
+       cassia.reload.position.should eq(0)
+       paulo.reload.position.should eq(1)
+       roberto.reload.position.should eq(2)
      end
      
      it "must to update only the records with changed positions" do
@@ -56,9 +62,9 @@ describe People::Sorting do
        
        reorder(:name)
        
-       Person.find(cassia.id).position.should == 0
-       Person.find(paulo.id).position.should == 1
-       Person.find(roberto.id).position.should == 2
+       Person.find(cassia.id).position.should eq(0)
+       Person.find(paulo.id).position.should eq(1)
+       Person.find(roberto.id).position.should eq(2)
      end
   end
   
