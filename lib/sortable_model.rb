@@ -33,7 +33,7 @@ module SortableModel
     end
   
     def last_position
-      last = self..maximum(:position)
+      last = self.maximum(:position)
       last.nil? ? 0 : last + 1
     end
     

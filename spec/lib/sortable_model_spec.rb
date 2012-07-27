@@ -6,12 +6,12 @@ describe SortableModel::ClassMethods do
   
   describe ".last_position" do
      it "give zero when there are no people" do
-       last_position.should == 0
+       Person.last_position.should == 0
      end
      
      it "give lastest position plus one when there are people" do
        Person.create(:name => "cassia")
-       last_position.should == 1
+       Person.last_position.should == 1
      end     
   end
 
@@ -30,7 +30,7 @@ describe SortableModel::ClassMethods do
        old_positions = [cassia.id,roberto.id,paulo.id]
        new_positions = [cassia.id,paulo.id,roberto.id]
       
-       update_positions_state(old_positions,new_positions)
+       Person.update_positions_state(old_positions,new_positions)
        
        cassia.reload.position.should eq(0)
        paulo.reload.position.should eq(1)
@@ -45,7 +45,7 @@ describe SortableModel::ClassMethods do
        old_positions = [cassia.id,roberto.id,paulo.id]
        new_positions = [cassia.id,paulo.id,roberto.id]
        
-       update_positions_state(old_positions,new_positions)
+       Person.update_positions_state(old_positions,new_positions)
        
        Person.find(cassia.id).updated_at.should eq(cassia.updated_at)
        Person.find(paulo.id).updated_at.should_not eq(paulo.updated_at)
@@ -60,7 +60,7 @@ describe SortableModel::ClassMethods do
        roberto = Person.create(:name => "roberto")
        paulo = Person.create(:name => "paulo")
        
-       reorder(:name)
+       Person.reorder(:name)
        
        Person.find(cassia.id).position.should eq(0)
        Person.find(paulo.id).position.should eq(1)
