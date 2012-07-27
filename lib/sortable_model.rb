@@ -21,36 +21,33 @@ module SortableModel
   module ClassMethods
     
     def update_positions_state(old_positions,new_positions)
-      old_positions.each_with_index do |person_id,old_index|
-        new_index = new_positions.index(person_id)
-        if old_index != new_index
-          person = Person.find(person_id)
-          update_person_position(person,new_index.to_i)
-        end
+      old_positions.each_with_index do |id,index|
+        new_index = new_positions.index(id)
+        update_model_position(self.find(id),new_index.to_i) if index != new_index
       end
     end
   
     def reorder(column)
-      people = Person.unscoped.all(:order => column)
-      replace_position_with_index(people)
+      models = self.unscoped.all(:order => column)
+      replace_position_with_index(models)
     end
   
     def last_position
-      last = Person.maximum(:position)
+      last = self..maximum(:position)
       last.nil? ? 0 : last + 1
     end
     
     private
           
-    def replace_position_with_index(people)
-      people.each_with_index do |person,index|
-        update_person_position(person,index) if person.position != index
+    def replace_position_with_index(models)
+      models.each_with_index do |model,index|
+        update_model_position(model,index) if model.position != index
       end
     end
     
-    def update_person_position(person,new_position)
-      person.position = new_position
-      person.save
+    def update_model_position(model,new_position)
+      model.position = new_position
+      model.save
     end
     
   end

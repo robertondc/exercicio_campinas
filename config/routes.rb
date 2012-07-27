@@ -1,4 +1,6 @@
 Exercicio::Application.routes.draw do
+  resources :animals
+
   resources :people
 
   # The priority is based upon order of creation:
