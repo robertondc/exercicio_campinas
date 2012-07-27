@@ -1,21 +1,17 @@
-
-<%= javascript_tag do %>
-  window.sortingURL = '<%=j "#{positions_state_path}.json" %>';
-<% end %>
- 
  <p>
     Reorder by <%= link_to 'name', reorder_people_by_name_path, :method => :post %>
  </p>
  
- <ul id="sortable">
-<% @people.each do |person| %>
-  <li class="ui-state-default" id="<%=person.id%>">
-      <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
-        <%= person.name %>
-        <%= link_to 'Show', person, :class => 'person-edit' %> 
-        <%= link_to 'Edit', edit_person_path(person), :class => 'person-edit' %> 
-        <%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'person-edit' %> 
-    </span>
-  </li>
+<%= content_tag "ul", id: "sortable", data: {sorting_url: "#{positions_state_path}.json"} do %>
+	<% @people.each do |person| %>
+	  <li class="ui-state-default" id="<%=person.id%>">
+	      <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+	        <%= person.name %>
+	        <%= link_to 'Show', person, :class => 'person-edit' %> 
+	        <%= link_to 'Edit', edit_person_path(person), :class => 'person-edit' %> 
+	        <%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'person-edit' %> 
+	    </span>
+	  </li>
+	<% end %>
 <% end %>
 </ul>
