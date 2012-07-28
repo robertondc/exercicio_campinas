@@ -1,24 +1,11 @@
 <h1>Listing animals</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Position</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @animals.each do |animal| %>
-  <tr>
-    <td><%= animal.name %></td>
-    <td><%= animal.position %></td>
-    <td><%= link_to 'Show', animal %></td>
-    <td><%= link_to 'Edit', edit_animal_path(animal) %></td>
-    <td><%= link_to 'Destroy', animal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+ <p>
+    Reorder by <%= link_to 'name', reorder_animals_by_name_path, :method => :post %>
+ </p>
+ 
+<%= render :partial => 'sortable/list', :locals => {:sortable => @animals, :positions_state_path => "#{animals_positions_state_path}.json"} %>
+ 
 
 <br />
 

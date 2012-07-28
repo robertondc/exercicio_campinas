@@ -59,6 +59,9 @@ Exercicio::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
-  match 'people/positions_state(.:format)' => 'people#positions_state', :method => :post, :as => 'positions_state'
+  match 'people/positions_state(.:format)' => 'people#positions_state', :method => :post, :as => 'people_positions_state'
   match 'people/reorder_by_name(.:format)' => 'people#reorder_by_name', :method => :post, :as => 'reorder_people_by_name'
+  match 'animals/positions_state(.:format)' => 'animals#positions_state', :method => :post, :as => 'animals_positions_state'
+  match 'animals/reorder_by_name(.:format)' => 'animals#reorder_by_name', :method => :post, :as => 'reorder_animals_by_name'
+  
 end
