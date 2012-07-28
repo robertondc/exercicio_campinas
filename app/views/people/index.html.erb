@@ -1,6 +1,10 @@
 <h1>Listing people</h1>
  
-<%= render 'people/sorted_people' %>
+ <p>
+    Reorder by <%= link_to 'name', reorder_people_by_name_path, :method => :post %>
+ </p>
+ 
+<%= render :partial => 'sortable/list', :locals => {:sortable => @people, :positions_state_path => "#{positions_state_path}.json"} %>
  
 <br />
 

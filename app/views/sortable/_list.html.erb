@@ -1,0 +1,12 @@
+ <%= content_tag "ul", id: "sortable", data: {sorting_url: "#{positions_state_path}"} do %>
+	<% sortable.each do |item| %>
+	  <li class="ui-state-default" id="<%=item.id%>">
+	      <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+	        <%= item.name %>
+	        <%= link_to 'Show', item, :class => 'person-edit' %> 
+	        <%= link_to 'Edit', edit_polymorphic_path(item), :class => 'person-edit' %> 
+	        <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'person-edit' %> 
+	    </span>
+	  </li>
+	<% end %>
+<% end %>
