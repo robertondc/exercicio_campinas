@@ -81,16 +81,14 @@ class PeopleController < ApplicationController
     end
   end
 
-  def positions_state
-    Person.update_positions_state(params[:old_positions],params[:new_positions])
-    respond_to do |format|
-      format.json { head :no_content }
-    end
-  end
-
-  def reorder_by_name
+  def reorder
     Person.reorder(:name)
     redirect_to people_path
+  end
+  
+  def sort
+    Person.update_positions(params[:positions])
+    render json: :no_content
   end
   
 end

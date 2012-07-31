@@ -81,14 +81,14 @@ class AnimalsController < ApplicationController
     end
   end
   
-  def positions_state
-    Animal.update_positions_state(params[:old_positions],params[:new_positions])
+  def sort
+    Animal.update_positions(params[:positions])
     respond_to do |format|
       format.json { head :no_content }
     end
   end
 
-  def reorder_by_name
+  def reorder
     Animal.reorder(:name)
     redirect_to animals_path
   end

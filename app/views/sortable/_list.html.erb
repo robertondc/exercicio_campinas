@@ -1,4 +1,4 @@
- <%= content_tag "ul", id: "sortable", data: {sorting_url: "#{positions_state_path}"} do %>
+ <%= content_tag "ul", id: "sortable", data: {sorting_url: "#{sort_path}"} do %>
 	<% sortable.each do |item| %>
 	  <li class="ui-state-default" id="<%=item.id%>">
 	      <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>

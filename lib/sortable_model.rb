@@ -19,12 +19,11 @@ module SortableModel
   end
 
   module ClassMethods
-    
-    def update_positions_state(old_positions,new_positions)
-      old_positions.each_with_index do |id,index|
-        new_index = new_positions.index(id)
-        update_model_position(self.find(id),new_index.to_i) if index != new_index
-      end
+  
+    def update_positions(positions)
+      update_all(
+          ['position = FIND_IN_SET(id, ?)', positions.join(',')],{ :id => positions }
+      )
     end
   
     def reorder(column)
