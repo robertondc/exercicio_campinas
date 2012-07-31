@@ -22,7 +22,7 @@ module SortableModel
   
     def update_positions(positions)
       update_all(
-          ['position = FIND_IN_SET(id, ?)', positions.join(',')],{ :id => positions }
+          ['position = FIND_IN_SET(id, ?)-1', positions.join(',')],{ :id => positions }
       )
     end
   
