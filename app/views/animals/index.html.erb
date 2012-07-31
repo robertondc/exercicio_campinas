@@ -1,10 +1,14 @@
 <h1>Listing animals</h1>
 
- <p>
-    Reorder by <%= link_to 'name', reorder_animals_path, :method => :post %>
- </p>
+<p>
+	Reorder by <%= link_to 'name', reorder_animals_path, :method => :post %>
+</p>
  
-<%= render :partial => 'sortable/list', :locals => {:sortable => @animals, :sort_path => "#{sort_animals_path}"} %>
+<%= content_tag "ul", id: "sortable", data: {sorting_url: "#{sort_animals_path}"} do %>
+
+	<%= render @animals %>
+
+<% end %>
  
 
 <br />

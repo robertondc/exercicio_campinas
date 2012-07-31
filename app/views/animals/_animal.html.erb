@@ -1,0 +1,8 @@
+<li class="ui-state-default" id="<%=animal.id%>">
+	<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+	    <%= animal.name %>
+	    <%= link_to 'Show', animal, :class => 'person-edit' %> 
+	    <%= link_to 'Edit', edit_animal_path(animal), :class => 'person-edit' %> 
+	    <%= link_to 'Destroy', animal, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'person-edit' %> 
+	</span>
+</li>
