@@ -4,11 +4,7 @@
 	Reorder by <%= link_to 'name', reorder_people_path, :method => :post %>
  </p>
  
-<%= content_tag "ul", id: "sortable", data: {sorting_url: "#{sort_people_path}"} do %>
-
-	<%= render @people %>
-
-<% end %>
+<%= render :partial => 'sortable/list', :locals => {:sortable => @people, :sort_path => "#{sort_people_path}"} %>
  
 <br />
 
