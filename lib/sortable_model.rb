@@ -21,18 +21,20 @@ module SortableModel
   module ClassMethods
   
     def update_positions(id,position)
-      model = self.find(id)
-      if (position.to_i > model.position)
-        update_all(
-            ['position = position-1 where position <= ?', position]
-        )
-      else
-       update_all(
-            ['position = position+1 where position >= ?', position]
-        )
+      transaction do
+        model = self.find(id)
+        if (position.to_i > model.position)
+          update_all(
+              ['position = position-1 where position <= ?', position]
+          )
+        else
+         update_all(
+              ['position = position+1 where position >= ?', position]
+          )
+        end
+        model.position = position
+        model.save
       end
-      model.position = position
-      model.save
     end
   
     def reorder(column)
