@@ -15,7 +15,7 @@ describe SortableModel::ClassMethods do
      end     
   end
 
-  describe ".update_positions_state" do
+  describe ".update_positions" do
     
      it "update model positions when positions has changed" do
      
@@ -27,10 +27,10 @@ describe SortableModel::ClassMethods do
        roberto.position.should eq(1)
        paulo.position.should eq(2)
              
-       Person.update_positions([cassia.id,paulo.id,roberto.id])
+       Person.update_positions(cassia.id,2)
 
-       cassia.reload.position.should eq(0)
-       roberto.reload.position.should eq(2)
+       cassia.reload.position.should eq(2)
+       roberto.reload.position.should eq(0)
        paulo.reload.position.should eq(1)       
      end
           
