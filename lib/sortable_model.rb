@@ -20,10 +20,19 @@ module SortableModel
 
   module ClassMethods
   
-    def update_positions(positions)
-      update_all(
-          ['position = FIND_IN_SET(id, ?)-1', positions.join(',')],{ :id => positions }
-      )
+    def update_positions(id,position)
+      person = Person.find(id)
+      if (position.to_i > person.position)
+        update_all(
+            ['position = position-1 where position <= ?', position]
+        )
+      else
+       update_all(
+            ['position = position+1 where position >= ?', position]
+        )
+      end
+      person.position = position
+      person.save
     end
   
     def reorder(column)

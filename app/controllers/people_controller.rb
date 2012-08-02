@@ -87,7 +87,7 @@ class PeopleController < ApplicationController
   end
   
   def sort
-    Person.update_positions(params[:positions])
+    Person.update_positions(params[:id],params[:position])
     render json: :no_content
   end
   

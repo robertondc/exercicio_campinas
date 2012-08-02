@@ -1,8 +1,10 @@
 Exercicio::Application.routes.draw do
 
   resources :people do
-    collection do
+    member do
       post :sort
+    end
+    collection do
       post :reorder
     end
   end
