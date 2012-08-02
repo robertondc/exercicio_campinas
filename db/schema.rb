@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120727032958) do
+ActiveRecord::Schema.define(:version => 20120802233511) do
 
   create_table "animals", :force => true do |t|
     t.string   "name"
@@ -26,5 +26,7 @@ ActiveRecord::Schema.define(:version => 20120727032958) do
     t.datetime "updated_at",                :null => false
     t.integer  "position",   :default => 0, :null => false
   end
+
+  add_index "people", ["position"], :name => "people_position_index", :unique => true
 
 end
