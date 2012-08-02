@@ -82,7 +82,7 @@ class AnimalsController < ApplicationController
   end
   
   def sort
-    Animal.update_positions(params[:positions])
+    Animal.update_positions(params[:id],params[:position])
     respond_to do |format|
       format.json { head :no_content }
     end

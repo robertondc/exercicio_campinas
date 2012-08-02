@@ -10,8 +10,10 @@ Exercicio::Application.routes.draw do
   end
   
   resources :animals do
-      collection do
-      post :sort
+    member do
+     post :sort
+    end
+    collection do
       post :reorder
     end
   end
