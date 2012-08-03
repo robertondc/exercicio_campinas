@@ -5,13 +5,13 @@ module SortableModel
   included do
     default_scope order("position")
     before_create :put_last_position
-    after_destroy :reorder_positions          
+    #after_destroy :reorder_positions          
   end
 
   private
 
   def put_last_position
-   self.position = self.class.last_position
+   self.position = self.class.last_new_position
   end
   
   def reorder_positions
@@ -23,18 +23,21 @@ module SortableModel
     def update_positions(id,position)
       transaction do
         model = self.find(id)
+        model.position = self.last_new_position
+        model.save
         if (position.to_i > model.position)
           update_all(
               ['position = position-1 where position <= ?', position]
           )
         else
-         update_all(
+          update_all(
               ['position = position+1 where position >= ?', position]
           )
         end
         model.position = position
         model.save
       end
+      
     end
   
     def reorder(column)
@@ -42,7 +45,7 @@ module SortableModel
       replace_position_with_index(models)
     end
   
-    def last_position
+    def last_new_position
       last = self.maximum(:position)
       last.nil? ? 0 : last + 1
     end
