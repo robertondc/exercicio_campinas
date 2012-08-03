@@ -4,7 +4,7 @@
     Reorder by <%= link_to 'name', reorder_animals_path, :method => :post %>
  </p>
  
-<%= render :partial => 'sortable/list', :locals => {:sortable => @animals, :sort_path => "#{sort_animals_path}"} %>
+<%= render :partial => 'sortable/list', :locals => {:sortable => @animals} %>
  
 <br />
 
